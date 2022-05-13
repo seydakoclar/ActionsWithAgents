@@ -1,0 +1,9 @@
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.csproj.AssemblyReference.cache
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.Properties.Resources.resources
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.csproj.GenerateResource.cache
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.csproj.CoreCompileInputs.cache
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\bin\Debug\ActionsWithAgents.exe
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\bin\Debug\ActionsWithAgents.pdb
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.Form1.resources
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.exe
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.pdb
