@@ -35,5 +35,20 @@ namespace ActionsWithAgents
         {
 
         }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void signature_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
