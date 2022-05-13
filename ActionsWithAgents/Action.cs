@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ActionsWithAgents
 {
-    class Action
+    public class Action
     {
         public string Name;
 

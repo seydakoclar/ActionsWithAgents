@@ -7,3 +7,4 @@ C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\bin\Debug\Action
 C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.Form1.resources
 C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.exe
 C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.pdb
+C:\Users\seyda\source\repos\ActionsWithAgents\ActionsWithAgents\obj\Debug\ActionsWithAgents.Form2.resources

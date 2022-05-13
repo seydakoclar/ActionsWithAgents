@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ActionsWithAgents
 {
-    class Fluent
+    public class Fluent
     {
         public string Name;
         public bool Initial;
