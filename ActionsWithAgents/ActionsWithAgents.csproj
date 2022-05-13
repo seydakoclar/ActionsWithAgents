@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Agent.cs" />
     <Compile Include="Action.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Statement.cs" />
     <Compile Include="Fluent.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
