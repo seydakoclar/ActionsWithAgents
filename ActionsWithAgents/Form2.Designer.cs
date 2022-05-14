@@ -460,6 +460,7 @@ namespace ActionsWithAgents
             this.button5.TabIndex = 44;
             this.button5.Text = "BACK";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // checkBox5
             // 

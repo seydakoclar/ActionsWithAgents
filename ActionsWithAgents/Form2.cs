@@ -15,12 +15,15 @@ namespace ActionsWithAgents
         List<Fluent> fluents;
         List<Action> actions;
         List<Statement> statements = new List<Statement> { };
-
-        public Form2(List<Agent> a, List<Fluent> f, List<Action> ac)
+        string[] texts = new string[3];
+        public Form2(List<Agent> a, List<Fluent> f, List<Action> ac, string t1, string t2, string t3)
         {
             agents = a;
             fluents = f;
             actions = ac;
+            texts[0] = t1;
+            texts[1] = t2;
+            texts[2] = t3;
             InitializeComponent();
         }
 
@@ -172,6 +175,13 @@ namespace ActionsWithAgents
             {
                 listView4.Items.Remove(eachItem);
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {            
+            Form1 frm1 = new Form1(texts);
+            frm1.Show();
+            this.Hide();
         }
     }
 }
