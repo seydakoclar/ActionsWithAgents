@@ -14,7 +14,7 @@ namespace ActionsWithAgents
         Action A;
         Fluent f2;
 
-        public Statement(Fluent _f)
+        public Statement(Fluent _f) // initially statement
         {
             ag = null;
             A = null;
@@ -28,41 +28,42 @@ namespace ActionsWithAgents
                 sentence += "-" + f.Name;
             StatementSentence = sentence;
         }
-        public Statement(string type, Agent _ag, Fluent _f, Action _A)
+        public Statement(string type, Agent _ag, Fluent _f, Action _A) //value, effect
         {
             ag = _ag;
             f = _f;
             A = _A;
-       
+            StatementType = type;
             if(type == "value")
             {
                 if (f.Initial == true)
                     StatementSentence = f.Name;
                 else
                     StatementSentence = "-" + f.Name;
-                StatementSentence += "after " + _A.Name + " by " + _ag.Name;
+                StatementSentence += " after " + _A.Name + " by " + _ag.Name;
             }
             else
             {
-                StatementSentence += _A.Name + " by " + _ag.Name + "causes ";
+                StatementSentence += _A.Name + " by " + _ag.Name + " causes ";
                 if (f.Initial == true)
-                    StatementSentence = f.Name;
+                    StatementSentence += f.Name;
                 else
-                    StatementSentence = "-" + f.Name;
+                    StatementSentence += "-" + f.Name;
             }
         }
-        public Statement(Agent _ag, Fluent _f, Action _A, Fluent _f2)
+        public Statement(Agent _ag, Fluent _f, Action _A, Fluent _f2)//effectwithif
         {
             ag = _ag;
             f = _f;
             A = _A;
             f2 = _f2;
-            StatementSentence += _A.Name + " by " + _ag.Name + "causes ";
+            StatementType = "effectwithif";
+            StatementSentence += _A.Name + " by " + _ag.Name + " causes ";
             if (f.Initial == true)
                 StatementSentence += f.Name;
             else
                 StatementSentence += "-" + f.Name;
-            StatementSentence += "if ";
+            StatementSentence += " if ";
             if (f2.Initial == true)
                 StatementSentence += f2.Name;
             else

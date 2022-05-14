@@ -11,7 +11,12 @@ namespace ActionsWithAgents
 
         public Action(string n)
         {
-            this.Name = n.ToUpper();
+            Name = n.ToUpper();
+        }
+
+        public Action(Action a)
+        {
+            Name = a.Name;
         }
     }
 }

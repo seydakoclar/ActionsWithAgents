@@ -10,7 +10,11 @@ namespace ActionsWithAgents
         public string Name;
         public Agent(string n)
         {
-            this.Name = n;
+            Name = n;
+        }
+        public Agent(Agent a)
+        {
+            Name = a.Name;
         }
     }
 }

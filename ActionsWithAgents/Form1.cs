@@ -27,28 +27,28 @@ namespace ActionsWithAgents
                 string[] fluentNames = fluentText.Split(',');
                 if (agentText != "" && actionText != "" && fluentText != "")
                 {
-                    Agent[] agents = new Agent[agentNames.Length];
-                    Fluent[] fluents = new Fluent[fluentNames.Length];
-                    Action[] actions = new Action[actionNames.Length];
+                    List<Agent> agents = new List<Agent> { };
+                    List<Fluent> fluents = new List<Fluent> { };
+                    List <Action> actions = new List<Action> { };
 
                     int i = 0;
                     foreach (string agentName in agentNames)
                     {
-                        agents[i] = new Agent(agentName);
+                        agents.Add(new Agent(agentName));
                         i++;
                     }
                     i = 0;
 
                     foreach (string fluentName in fluentNames)
                     {
-                        fluents[i] = new Fluent(fluentName);
+                        fluents.Add(new Fluent(fluentName));
                         i++;
                     }
 
                     i = 0;
                     foreach (string actionName in actionNames)
                     {
-                        actions[i] = new Action(actionName);
+                        actions.Add(new Action(actionName));
                         i++;
                     }
 
