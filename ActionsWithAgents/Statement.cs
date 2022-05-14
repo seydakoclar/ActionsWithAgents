@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ActionsWithAgents
 {
-    class Statement
+    public class Statement
     {
         public string StatementType; //initially, value, effectwithif, effect
         public string StatementSentence;

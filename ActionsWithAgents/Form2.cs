@@ -87,7 +87,7 @@ namespace ActionsWithAgents
                 Fluent f = new Fluent(fluents[comboBox4.SelectedIndex]);
                 f.ChangeInit(!checkBox2.Checked);
                 Fluent f2 = new Fluent(fluents[comboBox7.SelectedIndex]);
-                f.ChangeInit(!checkBox3.Checked);
+                f2.ChangeInit(!checkBox3.Checked);
                 Statement s = new Statement(ag, f, ac, f2);
                 listView1.Items.Add(s.StatementSentence);
                 statements.Add(s);
@@ -95,7 +95,8 @@ namespace ActionsWithAgents
                 comboBox5.SelectedIndex = -1;
                 comboBox4.SelectedIndex = -1;
                 comboBox7.SelectedIndex = -1;
-                checkBox4.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
             }
         }
 
@@ -126,7 +127,9 @@ namespace ActionsWithAgents
         {
             if(listView4.Items.Count > 0 && (listView1.Items.Count > 0 || listView2.Items.Count > 0))
             {
-                //redirect form3
+                Form3 frm3 = new Form3(statements, agents, fluents, actions);
+                frm3.Show();
+                this.Hide();
             }
             else
             {
