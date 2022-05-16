@@ -11,6 +11,7 @@ namespace ActionsWithAgents
 {
     public partial class Form3 : Form
     {
+        //get all agents, fluents, actions and statements
         List<Agent> agents;
         List<Fluent> fluents;
         List<Action> actions;
@@ -24,6 +25,8 @@ namespace ActionsWithAgents
             InitializeComponent();
         }
 
+        // when the form is loaded show all the actions, agents and fluents in the left box as signature
+        // and show the domain description in the right box
         private void Form3_Load(object sender, EventArgs e)
         {
             listView1.Items.Add("ACTIONS:");
@@ -39,7 +42,7 @@ namespace ActionsWithAgents
             foreach (Statement s in statements)
                 listView4.Items.Add(s.StatementSentence);
         }
-
+        // this is for proceeding to form 4
         private void button4_Click(object sender, EventArgs e)
         {
             //Redirect to Last Form

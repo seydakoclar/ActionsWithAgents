@@ -5,10 +5,15 @@ using System.Text;
 
 namespace ActionsWithAgents
 {
+    // This class is for storing statements as objects having agent, fluents, action, statement type and
+    // statement sentence as properties and three constructors for creating a statement one with one fluent
+    // value which represents the initially statement second with type, agent, fluent and action values which
+    // represent the value and effect statements and the last one is with action, agent and two fluents which 
+    // represents the effect statement having if in it
     public class Statement
     {
         public string StatementType; //initially, value, effectwithif, effect
-        public string StatementSentence;
+        public string StatementSentence; //the sentence of the statement
         Agent ag;
         Fluent f;
         Action A;
@@ -28,7 +33,7 @@ namespace ActionsWithAgents
                 sentence += "-" + f.Name;
             StatementSentence = sentence;
         }
-        public Statement(string type, Agent _ag, Fluent _f, Action _A) //value, effect
+        public Statement(string type, Agent _ag, Fluent _f, Action _A) //value, effect statements
         {
             ag = _ag;
             f = _f;
@@ -51,7 +56,7 @@ namespace ActionsWithAgents
                     StatementSentence += "-" + f.Name;
             }
         }
-        public Statement(Agent _ag, Fluent _f, Action _A, Fluent _f2)//effectwithif
+        public Statement(Agent _ag, Fluent _f, Action _A, Fluent _f2) //effect statement with if
         {
             ag = _ag;
             f = _f;

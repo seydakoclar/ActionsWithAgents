@@ -5,6 +5,11 @@ using System.Text;
 
 namespace ActionsWithAgents
 {
+    // This class is for storing fluents as objects having name and the initial value as properties and
+    // three constructors for creating a fluent one with the name value with default initial as false
+    // and the other with name and initial value and the last one is from another fluent
+
+    // Initial value represents whether this fluent is hold or not in the initially statement
     public class Fluent
     {
         public string Name;
@@ -28,6 +33,7 @@ namespace ActionsWithAgents
             Initial = f.Initial;
 
         }
+        // Function for changing the initial value
         public void ChangeInit(bool init)
         {
             Initial = init;
