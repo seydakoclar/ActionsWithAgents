@@ -45,7 +45,30 @@ namespace ActionsWithAgents
         // this is for proceeding to form 4
         private void button4_Click(object sender, EventArgs e)
         {
-            //Redirect to Last Form
+            //create states here
+            List<State> states = new List<State> { };
+            List<Fluent> initialStateFluents = new List<Fluent> { };
+            foreach (Statement s in statements)
+            {
+                if (s.StatementType == "initially")
+                {
+                    initialStateFluents.Add(s.f);
+                }
+            }
+            states.Add(new State(initialStateFluents, true));
+
+            //int len = initialStateFluents.Count;
+            //int iter = 0, count = (int)Math.Pow(2, len);
+            //int i = 0;
+            //while(iter < count)
+            //{
+            //    int k = 0;
+            //    Fluent f = initialStateFluents[i];
+                
+            //}
+                
+            //create transition functions in here
+            //send these as arguments to form4
         }
     }
 }

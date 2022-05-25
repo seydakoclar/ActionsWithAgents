@@ -14,10 +14,10 @@ namespace ActionsWithAgents
     {
         public string StatementType; //initially, value, effectwithif, effect
         public string StatementSentence; //the sentence of the statement
-        Agent ag;
-        Fluent f;
-        Action A;
-        Fluent f2;
+        public Agent ag;
+        public Fluent f;
+        public Action A;
+        public Fluent f2;
 
         public Statement(Fluent _f) // initially statement
         {
