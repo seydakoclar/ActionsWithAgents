@@ -49,6 +49,12 @@
   <ItemGroup>
     <Compile Include="Agent.cs" />
     <Compile Include="Action.cs" />
+    <Compile Include="Form4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transition.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Form1.cs">
@@ -68,12 +74,6 @@
     </Compile>
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form4.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
     <Compile Include="Statement.cs" />
     <Compile Include="Fluent.cs" />
