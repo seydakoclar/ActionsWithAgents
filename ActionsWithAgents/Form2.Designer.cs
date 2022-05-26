@@ -109,7 +109,7 @@ namespace ActionsWithAgents
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(464, 169);
+            this.comboBox3.Location = new System.Drawing.Point(471, 168);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 24);
             this.comboBox3.TabIndex = 5;
@@ -207,7 +207,7 @@ namespace ActionsWithAgents
             // comboBox4
             // 
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(464, 246);
+            this.comboBox4.Location = new System.Drawing.Point(471, 246);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 24);
             this.comboBox4.TabIndex = 13;
@@ -231,7 +231,7 @@ namespace ActionsWithAgents
             // comboBox7
             // 
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(464, 278);
+            this.comboBox7.Location = new System.Drawing.Point(471, 278);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(121, 24);
             this.comboBox7.TabIndex = 20;
@@ -247,7 +247,7 @@ namespace ActionsWithAgents
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(598, 170);
+            this.button1.Location = new System.Drawing.Point(608, 169);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 22;
@@ -257,7 +257,7 @@ namespace ActionsWithAgents
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(598, 259);
+            this.button2.Location = new System.Drawing.Point(608, 259);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 23;
@@ -267,7 +267,7 @@ namespace ActionsWithAgents
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(598, 356);
+            this.button3.Location = new System.Drawing.Point(608, 356);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 35;
@@ -339,7 +339,7 @@ namespace ActionsWithAgents
             // comboBox11
             // 
             this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Location = new System.Drawing.Point(100, 357);
+            this.comboBox11.Location = new System.Drawing.Point(104, 357);
             this.comboBox11.Name = "comboBox11";
             this.comboBox11.Size = new System.Drawing.Size(121, 24);
             this.comboBox11.TabIndex = 24;
@@ -364,6 +364,7 @@ namespace ActionsWithAgents
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.MouseHover += new System.EventHandler(this.listView1_MouseHover);
             // 
             // listView4
             // 
@@ -376,6 +377,7 @@ namespace ActionsWithAgents
             this.listView4.UseCompatibleStateImageBehavior = false;
             this.listView4.View = System.Windows.Forms.View.List;
             this.listView4.SelectedIndexChanged += new System.EventHandler(this.listView4_SelectedIndexChanged);
+            this.listView4.MouseHover += new System.EventHandler(this.listView4_MouseHover);
             // 
             // groupBox3
             // 
@@ -397,6 +399,7 @@ namespace ActionsWithAgents
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.List;
             this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
+            this.listView2.MouseHover += new System.EventHandler(this.listView2_MouseHover);
             // 
             // button4
             // 
@@ -404,7 +407,7 @@ namespace ActionsWithAgents
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(164, 23);
             this.button4.TabIndex = 39;
-            this.button4.Text = "CREATE LAGUAGE";
+            this.button4.Text = "CREATE LANGUAGE";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -413,40 +416,44 @@ namespace ActionsWithAgents
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(417, 171);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(35, 21);
+            this.checkBox1.Size = new System.Drawing.Size(38, 21);
             this.checkBox1.TabIndex = 40;
-            this.checkBox1.Text = "-";
+            this.checkBox1.Text = "~";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.MouseHover += new System.EventHandler(this.checkBox1_MouseHover);
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(423, 248);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(35, 21);
+            this.checkBox2.Size = new System.Drawing.Size(38, 21);
             this.checkBox2.TabIndex = 41;
-            this.checkBox2.Text = "-";
+            this.checkBox2.Text = "~";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.MouseHover += new System.EventHandler(this.checkBox2_MouseHover);
             // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(423, 281);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(35, 21);
+            this.checkBox3.Size = new System.Drawing.Size(38, 21);
             this.checkBox3.TabIndex = 42;
-            this.checkBox3.Text = "-";
+            this.checkBox3.Text = "~";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.MouseHover += new System.EventHandler(this.checkBox3_MouseHover);
             // 
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.Location = new System.Drawing.Point(62, 359);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(35, 21);
+            this.checkBox4.Size = new System.Drawing.Size(38, 21);
             this.checkBox4.TabIndex = 43;
-            this.checkBox4.Text = "-";
+            this.checkBox4.Text = "~";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.MouseHover += new System.EventHandler(this.checkBox4_MouseHover);
             // 
             // errorProvider1
             // 
@@ -465,12 +472,13 @@ namespace ActionsWithAgents
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(145, 60);
+            this.checkBox5.Location = new System.Drawing.Point(142, 60);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(35, 21);
+            this.checkBox5.Size = new System.Drawing.Size(38, 21);
             this.checkBox5.TabIndex = 50;
-            this.checkBox5.Text = "-";
+            this.checkBox5.Text = "~";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.MouseHover += new System.EventHandler(this.checkBox5_MouseHover);
             // 
             // button6
             // 

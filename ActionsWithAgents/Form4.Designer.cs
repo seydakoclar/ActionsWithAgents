@@ -39,7 +39,7 @@ namespace ActionsWithAgents
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(53, 82);
+            this.textBox1.Location = new System.Drawing.Point(51, 82);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(697, 22);
             this.textBox1.TabIndex = 0;
