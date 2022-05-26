@@ -65,7 +65,7 @@ namespace ActionsWithAgents
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.listView1);
-            this.groupBox1.Location = new System.Drawing.Point(53, 274);
+            this.groupBox1.Location = new System.Drawing.Point(53, 292);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(697, 89);
             this.groupBox1.TabIndex = 3;
