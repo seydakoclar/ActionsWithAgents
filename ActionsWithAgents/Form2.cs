@@ -161,6 +161,7 @@ namespace ActionsWithAgents
             foreach (ListViewItem eachItem in listView1.SelectedItems)
             {
                 listView1.Items.Remove(eachItem);
+                statements.Remove(findAndDeleteFromStatements(eachItem));
             }
         }
 
@@ -169,6 +170,7 @@ namespace ActionsWithAgents
             foreach (ListViewItem eachItem in listView2.SelectedItems)
             {
                 listView2.Items.Remove(eachItem);
+                statements.Remove(findAndDeleteFromStatements(eachItem));
             }
         }
 
@@ -193,13 +195,25 @@ namespace ActionsWithAgents
             }
         }
 
+        public Statement findAndDeleteFromStatements(ListViewItem item)
+        {
+            foreach(Statement s in statements)
+            {
+                if(s.StatementSentence == item.Text)
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
         // this is for deleting the initially statement when user clicks on the sentence
         private void listView4_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (ListViewItem eachItem in listView4.SelectedItems)
             {
                 listView4.Items.Remove(eachItem);
-                //findAndDeleteFromStatements(eachItem);
+                statements.Remove(findAndDeleteFromStatements(eachItem));
             }
         }
 
