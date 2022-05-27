@@ -161,6 +161,7 @@ namespace ActionsWithAgents
             foreach (ListViewItem eachItem in listView1.SelectedItems)
             {
                 listView1.Items.Remove(eachItem);
+                statements.Remove(findAndDeleteFromStatements(eachItem));
             }
         }
 
@@ -169,6 +170,7 @@ namespace ActionsWithAgents
             foreach (ListViewItem eachItem in listView2.SelectedItems)
             {
                 listView2.Items.Remove(eachItem);
+                statements.Remove(findAndDeleteFromStatements(eachItem));
             }
         }
 
@@ -193,12 +195,25 @@ namespace ActionsWithAgents
             }
         }
 
+        public Statement findAndDeleteFromStatements(ListViewItem item)
+        {
+            foreach(Statement s in statements)
+            {
+                if(s.StatementSentence == item.Text)
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
         // this is for deleting the initially statement when user clicks on the sentence
         private void listView4_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (ListViewItem eachItem in listView4.SelectedItems)
             {
                 listView4.Items.Remove(eachItem);
+                statements.Remove(findAndDeleteFromStatements(eachItem));
             }
         }
 
@@ -208,6 +223,110 @@ namespace ActionsWithAgents
             Form1 frm1 = new Form1(texts);
             frm1.Show();
             this.Hide();
+        }
+        private void checkBox2_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(checkBox2, "Click to make negation of fluent.");
+        }
+
+        private void checkBox5_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(checkBox5, "Click to make negation of fluent.");
+        }
+
+        private void checkBox1_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(checkBox1, "Click to make negation of fluent.");
+        }
+
+        private void checkBox3_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(checkBox3, "Click to make negation of fluent.");
+        }
+
+        private void checkBox4_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            // Set up the ToolTip text for the Button and Checkbox.
+            toolTip1.SetToolTip(checkBox4, "Click to make negation of fluent.");
+        }
+
+        private void listView4_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(listView4, "Click on the item to remove it.");
+        }
+
+        private void listView1_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(listView1, "Click on the item to remove it.");
+        }
+
+        private void listView2_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(listView2, "Click on the item to remove it.");
         }
     }
 }

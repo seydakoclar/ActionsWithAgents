@@ -64,11 +64,14 @@ namespace ActionsWithAgents
             //{
             //    int k = 0;
             //    Fluent f = initialStateFluents[i];
-                
+
             //}
-                
+
             //create transition functions in here
             //send these as arguments to form4
+            Form4 frm4 = new Form4();
+            frm4.Show();
+            this.Hide();
         }
     }
 }
