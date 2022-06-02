@@ -29,6 +29,12 @@ namespace ActionsWithAgents
         // and show the domain description in the right box
         private void Form3_Load(object sender, EventArgs e)
         {
+            foreach(Statement s in statements)
+            {
+                System.Diagnostics.Debug.WriteLine(s.StatementSentence);
+                System.Diagnostics.Debug.WriteLine(s.StatementType);
+            }
+
             listView1.Items.Add("ACTIONS:");
             foreach (Action a in actions)
                 listView1.Items.Add(a.Name);
@@ -55,6 +61,7 @@ namespace ActionsWithAgents
                     initialStateFluents.Add(s.f);
                 }
             }
+            
             states.Add(new State(initialStateFluents, true));
 
             //int len = initialStateFluents.Count;
@@ -69,7 +76,7 @@ namespace ActionsWithAgents
 
             //create transition functions in here
             //send these as arguments to form4
-            Form4 frm4 = new Form4();
+            Form4 frm4 = new Form4(agents, fluents);
             frm4.Show();
             this.Hide();
         }
