@@ -14,10 +14,12 @@ namespace ActionsWithAgents
     {
         List<Agent> agents;
         List<Fluent> fluents;
-        public Form4(List<Agent> a, List<Fluent> f)
+        List<State> states;
+        public Form4(List<Agent> a, List<Fluent> f, List<State> s)
         {
             agents = a;
             fluents = f;
+            states = s;
             InitializeComponent();
         }
 
