@@ -16,6 +16,7 @@ namespace ActionsWithAgents
         List<Fluent> fluents;
         List<Action> actions;
         List<Statement> statements;
+        
         public Form3(List<Statement> s, List<Agent> a, List<Fluent> f, List<Action> ac)
         {
             agents = a;
@@ -54,28 +55,16 @@ namespace ActionsWithAgents
             //create states here
             List<State> states = new List<State> { };
             List<Fluent> initialStateFluents = new List<Fluent> { };
-            foreach (Statement s in statements)
+            /*foreach (Statement s in statements)
             {
                 if (s.StatementType == "initially")
                 {
                     initialStateFluents.Add(s.f);
                 }
-            }
-            
-            //states.Add(new State(initialStateFluents, true));
-            int len = initialStateFluents.Count;
-            int iter = 0, count = (int)Math.Pow(2, len);
-            //int i = 0;
-            /*while(iter < count)
-            {
-                int k = 0;
-                *//*Fluent f = initialStateFluents[i];*//*
-                initialStateFluents.ForEach((c) =>
-                {
-                   
-                });
-
             }*/
+     
+            int len = fluents.Count;
+            int count = (int)Math.Pow(2, len);
 
             for(int i = 0;i<count;i++)
             {
@@ -86,7 +75,7 @@ namespace ActionsWithAgents
                 for (int k = 0; k < subs.Length; k++)
                 {
                     bool result = (subs[k].Equals('1')) ? true : false;
-                    Fluent f = initialStateFluents[k];
+                    Fluent f = fluents[k];
                     newList.Add(new Fluent(f.Name, result));
                 }
                 states.Add(new State(newList));
