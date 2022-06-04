@@ -69,6 +69,7 @@ namespace ActionsWithAgents
             this.listView4.TabIndex = 41;
             this.listView4.UseCompatibleStateImageBehavior = false;
             this.listView4.View = System.Windows.Forms.View.List;
+            this.listView4.SelectedIndexChanged += new System.EventHandler(this.listView4_SelectedIndexChanged);
             // 
             // groupBox2
             // 
