@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -10,21 +11,17 @@ namespace ActionsWithAgents
     // value which represents the initially statement second with type, agent, fluent and action values which
     // represent the value and effect statements and the last one is with action, agent and two fluents which 
     // represents the effect statement having if in it
-    public class Statement
+    public abstract class Statement
     {
-        public string StatementType; //initially, value, effectwithif, effect
+        public string StatementType;//initially, value, effectwithif, effect
         public string StatementSentence; //the sentence of the statement
-        public Agent ag;
-        public Fluent f;
-        public Action A;
-        public Fluent f2;
+    }
 
-        public Statement(Fluent _f) // initially statement
+    public class InitiallyStatement : Statement
+    {
+        Fluent fluent;
+        public InitiallyStatement(Fluent f)
         {
-            ag = null;
-            A = null;
-            f2 = null;
-            f = _f;
             StatementType = "initially";
             string sentence = "INITIALLY ";
             if (f.Initial == true)
@@ -33,46 +30,87 @@ namespace ActionsWithAgents
                 sentence += "-" + f.Name;
             StatementSentence = sentence;
         }
-        public Statement(string type, Agent _ag, Fluent _f, Action _A) //value, effect statements
+    }
+
+    public class EffectStatement: Statement
+    {
+        Agent agent;
+        Action action;
+        Fluent firstFluent;
+        List<Fluent> secondaryFluents;
+
+        public EffectStatement(Agent _ag, Fluent _f, Action _A, List<Fluent> _fluents)
         {
-            ag = _ag;
-            f = _f;
-            A = _A;
-            StatementType = type;
-            if(type == "value")
-            {
-                if (f.Initial == true)
-                    StatementSentence = f.Name;
-                else
-                    StatementSentence = "-" + f.Name;
-                StatementSentence += " after " + _A.Name + " by " + _ag.Name;
-            }
-            else
-            {
-                StatementSentence += _A.Name + " by " + _ag.Name + " causes ";
-                if (f.Initial == true)
-                    StatementSentence += f.Name;
-                else
-                    StatementSentence += "-" + f.Name;
-            }
-        }
-        public Statement(Agent _ag, Fluent _f, Action _A, Fluent _f2) //effect statement with if
-        {
-            ag = _ag;
-            f = _f;
-            A = _A;
-            f2 = _f2;
-            StatementType = "effectwithif";
+            agent = _ag;
+            firstFluent = _f;
+            action = _A;
             StatementSentence += _A.Name + " by " + _ag.Name + " causes ";
-            if (f.Initial == true)
-                StatementSentence += f.Name;
+            if (_f.Initial == true)
+                StatementSentence += _f.Name;
             else
-                StatementSentence += "-" + f.Name;
-            StatementSentence += " if ";
-            if (f2.Initial == true)
-                StatementSentence += f2.Name;
-            else
-                StatementSentence += "-" + f2.Name;            
+                StatementSentence += "-" + _f.Name;
+
+            // effect statement with if
+            if (_fluents.Count > 0)
+            {
+                StatementType = "effectwithif";
+                secondaryFluents = _fluents;
+                StatementSentence += " if ";
+                foreach (Fluent f in _fluents)
+                {
+                    if(f == _fluents.Last())
+                    {
+                        if (f.Initial == true)
+                            StatementSentence += f.Name;
+                        else
+                            StatementSentence += "-" + f.Name;
+                        
+                    }
+                    else
+                    {
+                        if (f.Initial == true)
+                            StatementSentence += f.Name + ", ";
+                        else
+                            StatementSentence += "-" + f.Name + ", ";
+                    }
+                   
+                }
+            }
+            else //effect statement without if
+            {
+                StatementType = "effect";
+                secondaryFluents = null;
+            }
         }
     }
+
+    public class ValueStatement : Statement
+    {
+        List<Agent> agents;
+        List<Action> actions;
+        Fluent fluent;
+
+        public ValueStatement(List<Agent> _agents, Fluent _f, List<Action> _actions)
+        {
+            fluent = _f;
+            StatementType = "value";
+            if (_f.Initial == true)
+                StatementSentence += _f.Name;
+            else
+                StatementSentence += "-" + _f.Name;
+            StatementSentence += " AFTER ";
+
+            Agent[] agentsArr = _agents.ToArray();
+            Action[] actionArr = _actions.ToArray();
+
+            for(int i=0; i<agentsArr.Length; i++)
+            {
+                StatementSentence += "(" + actionArr[i].Name + ", " + agentsArr[i].Name + ")";
+                if(i < agentsArr.Length - 1)
+                {
+                    StatementSentence += ", ";
+                }
+            }
+        }
+    }  
 }
