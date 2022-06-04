@@ -18,6 +18,9 @@ namespace ActionsWithAgents
         List<Action> actions;
         // store all the statements in a string
         List<Statement> statements = new List<Statement> { };
+        Dictionary<Agent, Action> agent_action= new Dictionary<Agent, Action> { };
+        Dictionary<Action, Fluent> action_fluent = new Dictionary<Action, Fluent> { };
+
         // store the text values of agent, action and fluent in case user wants to go back to the form 1
         string[] texts = new string[3];
         public Form2(List<Agent> a, List<Fluent> f, List<Action> ac, string t1, string t2, string t3)
@@ -49,12 +52,16 @@ namespace ActionsWithAgents
                 Statement s = new Statement(stype, ag, f, ac);
                 listView1.Items.Add(s.StatementSentence);
                 statements.Add(s);
+                agent_action.Add(ag, ac);
+                action_fluent.Add(ac, f);
                 comboBox1.SelectedIndex = -1;
                 comboBox2.SelectedIndex = -1;
                 comboBox3.SelectedIndex = -1;
                 checkBox4.Checked = false;
             }
         }
+
+        
 
         // when the form is loading this function fills the data of the combo boxes with the created agent, fluent
         // and action values.

@@ -86,7 +86,7 @@ namespace ActionsWithAgents
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(59, 63);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 17);
+            this.label1.Size = new System.Drawing.Size(67, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "INITIALLY";
             // 
@@ -119,7 +119,7 @@ namespace ActionsWithAgents
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(59, 139);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 17);
+            this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 6;
             this.label2.Text = "Action";
             // 
@@ -128,7 +128,7 @@ namespace ActionsWithAgents
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(189, 172);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 17);
+            this.label3.Size = new System.Drawing.Size(25, 16);
             this.label3.TabIndex = 7;
             this.label3.Text = "BY";
             // 
@@ -137,7 +137,7 @@ namespace ActionsWithAgents
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(218, 139);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 17);
+            this.label4.Size = new System.Drawing.Size(42, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "Agent";
             // 
@@ -146,7 +146,7 @@ namespace ActionsWithAgents
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(348, 172);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 17);
+            this.label5.Size = new System.Drawing.Size(62, 16);
             this.label5.TabIndex = 9;
             this.label5.Text = "CAUSES";
             // 
@@ -155,7 +155,7 @@ namespace ActionsWithAgents
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(414, 139);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 17);
+            this.label6.Size = new System.Drawing.Size(43, 16);
             this.label6.TabIndex = 10;
             this.label6.Text = "Fluent";
             // 
@@ -164,7 +164,7 @@ namespace ActionsWithAgents
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(420, 217);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 17);
+            this.label7.Size = new System.Drawing.Size(43, 16);
             this.label7.TabIndex = 18;
             this.label7.Text = "Fluent";
             // 
@@ -173,7 +173,7 @@ namespace ActionsWithAgents
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(354, 250);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 17);
+            this.label8.Size = new System.Drawing.Size(62, 16);
             this.label8.TabIndex = 17;
             this.label8.Text = "CAUSES";
             // 
@@ -182,7 +182,7 @@ namespace ActionsWithAgents
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(224, 217);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(45, 17);
+            this.label9.Size = new System.Drawing.Size(42, 16);
             this.label9.TabIndex = 16;
             this.label9.Text = "Agent";
             // 
@@ -191,7 +191,7 @@ namespace ActionsWithAgents
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(195, 250);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(26, 17);
+            this.label10.Size = new System.Drawing.Size(25, 16);
             this.label10.TabIndex = 15;
             this.label10.Text = "BY";
             // 
@@ -200,7 +200,7 @@ namespace ActionsWithAgents
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(59, 217);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 17);
+            this.label11.Size = new System.Drawing.Size(44, 16);
             this.label11.TabIndex = 14;
             this.label11.Text = "Action";
             // 
@@ -241,7 +241,7 @@ namespace ActionsWithAgents
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(398, 282);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(19, 17);
+            this.label13.Size = new System.Drawing.Size(18, 16);
             this.label13.TabIndex = 21;
             this.label13.Text = "IF";
             // 
@@ -280,7 +280,7 @@ namespace ActionsWithAgents
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(59, 327);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(47, 17);
+            this.label16.Size = new System.Drawing.Size(43, 16);
             this.label16.TabIndex = 31;
             this.label16.Text = "Fluent";
             // 
@@ -289,7 +289,7 @@ namespace ActionsWithAgents
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(422, 360);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(26, 17);
+            this.label17.Size = new System.Drawing.Size(25, 16);
             this.label17.TabIndex = 30;
             this.label17.Text = "BY";
             // 
@@ -298,7 +298,7 @@ namespace ActionsWithAgents
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(456, 327);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(45, 17);
+            this.label18.Size = new System.Drawing.Size(42, 16);
             this.label18.TabIndex = 29;
             this.label18.Text = "Agent";
             // 
@@ -307,7 +307,7 @@ namespace ActionsWithAgents
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(231, 360);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(53, 17);
+            this.label19.Size = new System.Drawing.Size(52, 16);
             this.label19.TabIndex = 28;
             this.label19.Text = "AFTER";
             // 
@@ -316,7 +316,7 @@ namespace ActionsWithAgents
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(287, 327);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(47, 17);
+            this.label20.Size = new System.Drawing.Size(44, 16);
             this.label20.TabIndex = 27;
             this.label20.Text = "Action";
             // 
@@ -416,7 +416,7 @@ namespace ActionsWithAgents
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(417, 171);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(38, 21);
+            this.checkBox1.Size = new System.Drawing.Size(38, 20);
             this.checkBox1.TabIndex = 40;
             this.checkBox1.Text = "~";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -427,7 +427,7 @@ namespace ActionsWithAgents
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(423, 248);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(38, 21);
+            this.checkBox2.Size = new System.Drawing.Size(38, 20);
             this.checkBox2.TabIndex = 41;
             this.checkBox2.Text = "~";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -438,7 +438,7 @@ namespace ActionsWithAgents
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(423, 281);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(38, 21);
+            this.checkBox3.Size = new System.Drawing.Size(38, 20);
             this.checkBox3.TabIndex = 42;
             this.checkBox3.Text = "~";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -449,7 +449,7 @@ namespace ActionsWithAgents
             this.checkBox4.AutoSize = true;
             this.checkBox4.Location = new System.Drawing.Point(62, 359);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(38, 21);
+            this.checkBox4.Size = new System.Drawing.Size(38, 20);
             this.checkBox4.TabIndex = 43;
             this.checkBox4.Text = "~";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -474,7 +474,7 @@ namespace ActionsWithAgents
             this.checkBox5.AutoSize = true;
             this.checkBox5.Location = new System.Drawing.Point(142, 60);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(38, 21);
+            this.checkBox5.Size = new System.Drawing.Size(38, 20);
             this.checkBox5.TabIndex = 50;
             this.checkBox5.Text = "~";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -495,7 +495,7 @@ namespace ActionsWithAgents
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(142, 29);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(47, 17);
+            this.label14.Size = new System.Drawing.Size(43, 16);
             this.label14.TabIndex = 48;
             this.label14.Text = "Fluent";
             // 
