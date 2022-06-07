@@ -12,15 +12,18 @@ namespace ActionsWithAgents
     {
         public bool isInitial;
         public List<Fluent> fluents;
-        public State(List<Fluent> _fluents)
+        public string Name;
+        public State(List<Fluent> _fluents, string name)
         {
             isInitial = false;
             fluents = _fluents;
+            Name = name;
         }
-        public State(List<Fluent> _fluents, bool initial)
+        public State(List<Fluent> _fluents, bool initial, string name)
         {
             isInitial = initial;
             fluents = _fluents;
+            Name = name;
         }
     }
 }

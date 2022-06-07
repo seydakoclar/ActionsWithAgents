@@ -16,13 +16,18 @@ namespace ActionsWithAgents
         List<Fluent> fluents;
         List<Action> actions;
         List<Statement> statements;
-        
-        public Form3(List<Statement> s, List<Agent> a, List<Fluent> f, List<Action> ac)
+        Dictionary<string, Action> agent_action;
+        Dictionary<string, Fluent> action_fluent;
+        Dictionary<string, Fluent> restrains;
+        public Form3(List<Statement> s, List<Agent> a, List<Fluent> f, List<Action> ac, Dictionary<string, Action> ag_ac, Dictionary<string, Fluent> ac_fl, Dictionary<string, Fluent> res)
         {
             agents = a;
             statements = s;
             fluents = f;
             actions = ac;
+            agent_action = ag_ac;
+            action_fluent = ac_fl;
+            restrains = res;
             InitializeComponent();
         }
 
@@ -78,14 +83,63 @@ namespace ActionsWithAgents
                     Fluent f = fluents[k];
                     newList.Add(new Fluent(f.Name, result));
                 }
-                states.Add(new State(newList));
+                 states.Add(new State(newList, "sigma" + i));
             }
             
             //create transition functions in here
+
+            foreach(State st in states)
+            {
+                foreach(Agent ag in agents)
+                {
+                    foreach(Action ac in actions)
+                    {
+                        State res = create_transition_function(ag, ac, st);
+                    }
+                }
+            }
+
             //send these as arguments to form4
             Form4 frm4 = new Form4(agents, fluents, states);
             frm4.Show();
             this.Hide();
         }
+
+        private State create_transition_function(Agent ag, Action ac, State st)
+        {
+
+            //check agent_actions to see if given agent can peform the action
+            Action new_action = agent_action[ag.Name];
+            if (new_action != null)
+            {
+                /*
+                 this means that this action can be performed by the agent. 
+                 Now we will check if the action effects the fluent.
+                 */
+                Fluent new_f = action_fluent[ac.Name];
+                if (new_f != null)
+                {
+                    /*
+                    This means that this fluent can be changed by this action. 
+                    */
+                    Console.WriteLine(new_f.Name + " " + new_f.Initial);
+                    List<Fluent> sts = st.fluents;
+                    foreach(Fluent f in sts)
+                    {
+
+                    }
+
+                }
+
+                return st;
+
+            }
+            else
+            {
+                return st;
+
+            }
+        }
+        
     }
 }

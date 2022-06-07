@@ -18,9 +18,9 @@ namespace ActionsWithAgents
         List<Action> actions;
         // store all the statements in a string
         List<Statement> statements = new List<Statement> { };
-        Dictionary<Agent, Action> agent_action= new Dictionary<Agent, Action> { };
-        Dictionary<Action, Fluent> action_fluent = new Dictionary<Action, Fluent> { };
-
+        Dictionary<string, Action> agent_action= new Dictionary<string, Action> { };
+        Dictionary<string, Fluent> action_fluent = new Dictionary<string, Fluent> { };
+        Dictionary<string, Fluent> restrains = new Dictionary<string, Fluent> { };
         // store the text values of agent, action and fluent in case user wants to go back to the form 1
         string[] texts = new string[3];
         public Form2(List<Agent> a, List<Fluent> f, List<Action> ac, string t1, string t2, string t3)
@@ -52,8 +52,8 @@ namespace ActionsWithAgents
                 Statement s = new Statement(stype, ag, f, ac);
                 listView1.Items.Add(s.StatementSentence);
                 statements.Add(s);
-                agent_action.Add(ag, ac);
-                action_fluent.Add(ac, f);
+                agent_action.Add(ag.Name, ac);
+                action_fluent.Add(ac.Name, f);
                 comboBox1.SelectedIndex = -1;
                 comboBox2.SelectedIndex = -1;
                 comboBox3.SelectedIndex = -1;
@@ -110,6 +110,23 @@ namespace ActionsWithAgents
                 Statement s = new Statement(ag, f, ac, f2);
                 listView1.Items.Add(s.StatementSentence);
                 statements.Add(s);
+                try
+                {
+                    agent_action.Add(ag.Name, ac);
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("Key already exists.");
+                }
+                try
+                {
+                    action_fluent.Add(ac.Name, f);
+                }
+                catch (ArgumentException)
+                {
+                    Console.Write("key exists");
+                }
+                restrains.Add(f2.Name, f);
                 comboBox6.SelectedIndex = -1;
                 comboBox5.SelectedIndex = -1;
                 comboBox4.SelectedIndex = -1;
@@ -152,7 +169,7 @@ namespace ActionsWithAgents
         {
             if(listView4.Items.Count > 0 && (listView1.Items.Count > 0 || listView2.Items.Count > 0))
             {
-                Form3 frm3 = new Form3(statements, agents, fluents, actions);
+                Form3 frm3 = new Form3(statements, agents, fluents, actions, agent_action, action_fluent, restrains);
                 frm3.Show();
                 this.Hide();
             }
