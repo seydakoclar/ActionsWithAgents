@@ -60,15 +60,18 @@ namespace ActionsWithAgents
                     foreach(Fluent f in flus)
                     {
                         if (f.Name == ist.fluent.Name && f.Initial != ist.fluent.Initial)
-                            return false;
+                            return true;
                         else
+                        {
                             flus.Add(ist.fluent);
+                            break;
+                        }
                     }
                     if(flus.Count == 0)
                         flus.Add(ist.fluent);
                 }
             }
-            return true;
+            return false;
         }
 
         public bool checkValueStatementInconsistency()
@@ -263,5 +266,11 @@ namespace ActionsWithAgents
             }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form1 frm1 = new Form1();
+            frm1.Show();
+            this.Hide();
+        }
     }
 }
