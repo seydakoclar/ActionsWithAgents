@@ -42,11 +42,8 @@ namespace ActionsWithAgents
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
-<<<<<<< HEAD
             this.listView2 = new System.Windows.Forms.ListView();
-=======
             this.button3 = new System.Windows.Forms.Button();
->>>>>>> 7d84779268e75ce05dd1c1b5f3e234ce71c42c8d
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,7 +163,6 @@ namespace ActionsWithAgents
             this.checkBox5.Text = "~";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
-<<<<<<< HEAD
             // listView2
             // 
             this.listView2.HideSelection = false;
@@ -175,7 +171,7 @@ namespace ActionsWithAgents
             this.listView2.Size = new System.Drawing.Size(203, 246);
             this.listView2.TabIndex = 52;
             this.listView2.UseCompatibleStateImageBehavior = false;
-=======
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(680, 415);
@@ -185,19 +181,14 @@ namespace ActionsWithAgents
             this.button3.Text = "NEW";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
->>>>>>> 7d84779268e75ce05dd1c1b5f3e234ce71c42c8d
             // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(1073, 450);
+            this.ClientSize = new System.Drawing.Size(1095, 450);
             this.Controls.Add(this.listView2);
-=======
-            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button3);
->>>>>>> 7d84779268e75ce05dd1c1b5f3e234ce71c42c8d
             this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
@@ -234,10 +225,7 @@ namespace ActionsWithAgents
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.CheckBox checkBox5;
-<<<<<<< HEAD
         private System.Windows.Forms.ListView listView2;
-=======
         private System.Windows.Forms.Button button3;
->>>>>>> 7d84779268e75ce05dd1c1b5f3e234ce71c42c8d
     }
 }
