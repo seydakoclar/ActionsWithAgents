@@ -373,5 +373,15 @@ namespace ActionsWithAgents
             frm1.Show();
             this.Hide();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+            textBox2.Text = "";
+            checkBox5.Checked = false;
+            listView1.Items.Clear();
+        }
     }
 }
