@@ -312,7 +312,7 @@ namespace ActionsWithAgents
                 List<Transition> l = g.graphTransitionFunctions;
                 foreach(Transition t in l)
                 {
-                    listView2.Items.Add("Ψ (" + t.action + "," + t.agent + "," + t.starting + ") = " + t.resulting);
+                    listView2.Items.Add("Ψ (" + t.agent.Name + "," + t.action.Name + "," + t.starting.Name+ ") = " + t.resulting.Name);
                 }
             }
         }

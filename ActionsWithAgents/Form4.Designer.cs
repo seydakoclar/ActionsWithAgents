@@ -166,11 +166,12 @@ namespace ActionsWithAgents
             // listView2
             // 
             this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(814, 86);
+            this.listView2.Location = new System.Drawing.Point(822, 76);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(203, 246);
+            this.listView2.Size = new System.Drawing.Size(591, 246);
             this.listView2.TabIndex = 52;
             this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.List;
             // 
             // button3
             // 
@@ -186,7 +187,7 @@ namespace ActionsWithAgents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1095, 450);
+            this.ClientSize = new System.Drawing.Size(1439, 450);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.checkBox5);
