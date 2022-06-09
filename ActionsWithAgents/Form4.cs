@@ -18,9 +18,11 @@ namespace ActionsWithAgents
         List<Graph> graphs;
         List<Statement> statements;
         List<Action> actions;
+        List<State> states;
         List<Tuple<Action, Agent>> programSequence;
+        bool InConsistent = false;
 
-        public Form4(List<Agent> a, List<Fluent> f, List<Action> ac, List<Transition> t,List<Statement> s, List<Graph> g)
+        public Form4(List<Agent> a, List<Fluent> f, List<Action> ac, List<Transition> t,List<Statement> s, List<Graph> g, List<State> st)
         {
             actions = ac;
             agents = a;
@@ -28,12 +30,77 @@ namespace ActionsWithAgents
             transitions = t;
             statements = s;
             graphs = g;
+            states = st;
             InitializeComponent();
         }
 
-        bool checkInconsistencyOfStateHasNoTransitionFunction()
+        public bool checkInconsistencyOfStateHasNoTransitionFunction()
         {
-            return false;
+            foreach(State s in states)
+            {
+                Transition t = transitions.Find(delegate (Transition f1)
+                {
+                    return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
+                });
+                if (t != null)
+                    return false;
+                else
+                    return true;
+            }
+            return true;
+        }
+
+        public bool checkInitiallyStatementConflict()
+        {
+            List<Fluent> flus = new List<Fluent> { };
+            foreach (Statement s in statements)
+            {
+                if(s is InitiallyStatement ist)
+                {
+                    foreach(Fluent f in flus)
+                    {
+                        if (f.Name == ist.fluent.Name && f.Initial != ist.fluent.Initial)
+                            return false;
+                        else
+                            flus.Add(ist.fluent);
+                    }
+                    if(flus.Count == 0)
+                        flus.Add(ist.fluent);
+                }
+            }
+            return true;
+        }
+
+        public bool checkValueStatementInconsistency()
+        {
+            foreach(Graph g in graphs)
+            {
+                State resultingState = g.initialState;
+                foreach (Statement s in statements)
+                {
+                    if (s is ValueStatement vs)
+                    {
+                        Action[] acts = vs.actions.ToArray();
+                        for (int i = 0; i < acts.Length; i++)
+                        {
+                            Transition t = transitions.Find(delegate (Transition f1)
+                            {
+                                return f1.action.Name == acts[i].Name && f1.agent.Name == vs.agents[i].Name && f1.starting.Name == resultingState.Name;
+                            });
+                            resultingState = t.resulting;
+                        }
+                        Fluent lastFluent = resultingState.fluents.Find(delegate (Fluent f1)
+                        {
+                            return f1.Name == vs.fluent.Name;
+                        });
+                        if (lastFluent.Initial != vs.fluent.Initial)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;            
         }
         private void Form4_Load(object sender, EventArgs e)
         {
@@ -48,11 +115,24 @@ namespace ActionsWithAgents
 
             if(checkInconsistencyOfStateHasNoTransitionFunction())
             {
-
+                MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function defined for it.");
+                InConsistent = true;
             }
             else
             {
-
+                if (checkInitiallyStatementConflict())
+                {
+                    MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function satisfying the contradictory values of the same fluent.");
+                    InConsistent = true;
+                }
+                else
+                {
+                    if (checkValueStatementInconsistency())
+                    {
+                        MessageBox.Show("This is an inconsistent domain because there is conflict in the result of one of the value statements");
+                        InConsistent = true;
+                    }
+                }
             }
 
         }
@@ -75,42 +155,49 @@ namespace ActionsWithAgents
                 f.ChangeInit(!checkBox5.Checked);
                 string[] strArr = textBox1.Text.Split(',');
                 programSequence = new List<Tuple<Action, Agent>> { };
-                for(int i=0; i<strArr.Length; i+=2)
+                for (int i = 0; i < strArr.Length; i += 2)
                 {
                     Action a = new Action(strArr[i].Substring(1));
-                    Agent ag = new Agent(strArr[i+1].Substring(0, strArr[i + 1].Length - 1));
+                    Agent ag = new Agent(strArr[i + 1].Substring(0, strArr[i + 1].Length - 1));
                     programSequence.Add(new Tuple<Action, Agent>(a, ag));
                 }
-                if(graphs.Count == 1)
+                if (!InConsistent)
                 {
-                    State resultingState = graphs[0].initialState;
-                    foreach (Tuple<Action, Agent> pair in programSequence)
+                    if (graphs.Count == 1)
                     {
-                        Transition t = transitions.Find(delegate (Transition f1)
+                        State resultingState = graphs[0].initialState;
+                        foreach (Tuple<Action, Agent> pair in programSequence)
                         {
-                            return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
+                            Transition t = transitions.Find(delegate (Transition f1)
+                            {
+                                return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
+                            });
+                            resultingState = t.resulting;
+                        }
+                        Fluent lastFluent = resultingState.fluents.Find(delegate (Fluent f1)
+                        {
+                            return f1.Name == f.Name;
                         });
-                        resultingState = t.resulting;
-                    }
-                    MessageBox.Show("  " + resultingState.Name + " ");
-                    Fluent lastFluent = resultingState.fluents.Find(delegate (Fluent f1)
-                    {
-                        return f1.Name == f.Name;
-                    });
-                    if(lastFluent.Initial == f.Initial)
-                    {
-                        listView1.Items.Add("TRUE");
+                        if (lastFluent.Initial == f.Initial)
+                        {
+                            listView1.Items.Add("TRUE");
+                        }
+                        else
+                        {
+                            listView1.Items.Add("FALSE");
+                        }
                     }
                     else
                     {
-                        listView1.Items.Add("FALSE");
+                        //implement
                     }
                 }
                 else
                 {
-                    //implement
+                    listView1.Items.Add("YES");
                 }
-                
+
+
             }
         }
 
@@ -139,34 +226,42 @@ namespace ActionsWithAgents
                     programSequence.Add(new Tuple<Action, Agent>(a, ag));
                 }
 
-                if (graphs.Count == 1)
+                if (!InConsistent)
                 {
-                    State resultingState = graphs[0].initialState;
-                    foreach (Tuple<Action, Agent> pair in programSequence)
+                    if (graphs.Count == 1)
                     {
-                        Transition t = transitions.Find(delegate (Transition f1)
+                        State resultingState = graphs[0].initialState;
+                        foreach (Tuple<Action, Agent> pair in programSequence)
                         {
-                            return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
-                        });
-                        if (resultingState.Name != t.resulting.Name && t.agent.Name == agent.Name)
-                            isInvolved = true;
-                        resultingState = t.resulting;
-                    }
-                   
-                    if (isInvolved)
-                    {
-                        listView1.Items.Add("TRUE");
+                            Transition t = transitions.Find(delegate (Transition f1)
+                            {
+                                return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
+                            });
+                            if (resultingState.Name != t.resulting.Name && t.agent.Name == agent.Name)
+                                isInvolved = true;
+                            resultingState = t.resulting;
+                        }
+
+                        if (isInvolved)
+                        {
+                            listView1.Items.Add("YES");
+                        }
+                        else
+                        {
+                            listView1.Items.Add("NO");
+                        }
                     }
                     else
                     {
-                        listView1.Items.Add("FALSE");
+                        //implement
                     }
                 }
                 else
                 {
-                    //implement
+                    listView1.Items.Add("YES");
                 }
             }
         }
+
     }
 }

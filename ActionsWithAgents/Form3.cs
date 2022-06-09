@@ -288,7 +288,7 @@ namespace ActionsWithAgents
             }
             
             //send these as arguments to form4
-            Form4 frm4 = new Form4(agents, fluents, actions, transitions, statements, graphs);
+            Form4 frm4 = new Form4(agents, fluents, actions, transitions, statements, graphs, states);
             frm4.Show();
             this.Hide();
         }
