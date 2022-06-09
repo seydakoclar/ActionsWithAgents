@@ -176,6 +176,7 @@ namespace ActionsWithAgents
                 }
             }
 
+            printTransitions();
         }
         
         private void button1_Click(object sender, EventArgs e)
@@ -300,6 +301,18 @@ namespace ActionsWithAgents
                 else
                 {
                     listView1.Items.Add("YES");
+                }
+            }
+        }
+
+        private void printTransitions()
+        {
+            foreach(Graph g in graphs)
+            {
+                List<Transition> l = g.graphTransitionFunctions;
+                foreach(Transition t in l)
+                {
+                    listView2.Items.Add("Ψ (" + t.agent.Name + "," + t.action.Name + "," + t.starting.Name+ ") = " + t.resulting.Name);
                 }
             }
         }
