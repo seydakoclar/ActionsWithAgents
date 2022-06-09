@@ -44,6 +44,7 @@ namespace ActionsWithAgents
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.listView2 = new System.Windows.Forms.ListView();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,11 +184,23 @@ namespace ActionsWithAgents
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(37, 415);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 23);
+            this.button4.TabIndex = 53;
+            this.button4.Text = "Reset Query";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1439, 450);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.checkBox5);
@@ -228,5 +241,6 @@ namespace ActionsWithAgents
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
