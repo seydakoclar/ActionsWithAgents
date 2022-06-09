@@ -151,13 +151,13 @@ namespace ActionsWithAgents
             }
             else if(graphs.Count > 1)
             {
-                Graph g = checkInconsistencyOfStateHasNoTransitionFunctionForMultiple();
+                /*Graph g = checkInconsistencyOfStateHasNoTransitionFunctionForMultiple();
                 string str = "";
                 str += "This is an inconsistent domain because there is a state which has no transition function defined for it.\n";
                 str += "The graph functions are:\n";
                 str += printGraph(g);
                 MessageBox.Show(str);
-                InConsistent = true;
+                InConsistent = true;*/
             }
             else
             {
@@ -231,7 +231,32 @@ namespace ActionsWithAgents
                     }
                     else
                     {
-                        //implement
+                        int count = 1;
+                        foreach(Graph g in graphs)
+                        {
+                            State resultingState = g.initialState;
+                            foreach (Tuple<Action, Agent> pair in programSequence)
+                            {
+                                Transition t = g.graphTransitionFunctions.Find(delegate (Transition f1)
+                                {
+                                    return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
+                                });
+                                resultingState = t.resulting;
+                            }
+                            Fluent lastFluent = resultingState.fluents.Find(delegate (Fluent f1)
+                            {
+                                return f1.Name == f.Name;
+                            });
+                            if (lastFluent.Initial == f.Initial)
+                            {
+                                listView1.Items.Add("TRUE for graph " + count);
+                            }
+                            else
+                            {
+                                listView1.Items.Add("FALSE for graph " + count);
+                            }
+                            count++;
+                        }
                     }
                 }
                 else
@@ -295,7 +320,32 @@ namespace ActionsWithAgents
                     }
                     else
                     {
-                        //implement
+                        int count = 0;
+                        foreach (Graph g in graphs)
+                        {
+                            State resultingState = g.initialState;
+                            foreach (Tuple<Action, Agent> pair in programSequence)
+                            {
+                                Transition t = g.graphTransitionFunctions.Find(delegate (Transition f1)
+                                {
+                                    return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
+                                });
+                                if (resultingState.Name != t.resulting.Name && t.agent.Name == agent.Name)
+                                    isInvolved = true;
+                                resultingState = t.resulting;
+                            }
+
+                            if (isInvolved)
+                            {
+                                listView1.Items.Add("YES for graph " + count);
+                            }
+                            else
+                            {
+                                listView1.Items.Add("NO for graph " + count);
+                            }
+                            count++;
+                            isInvolved = false;
+                        }
                     }
                 }
                 else
