@@ -33,7 +33,24 @@ namespace ActionsWithAgents
             states = st;
             InitializeComponent();
         }
-
+        public Graph checkInconsistencyOfStateHasNoTransitionFunctionForMultiple()
+        {
+            foreach(Graph g in graphs)
+            {
+                foreach (State s in g.states)
+                {
+                    Transition t = transitions.Find(delegate (Transition f1)
+                    {
+                        return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
+                    });
+                    if (t != null)
+                        return g;
+                    else
+                        return null;
+                }
+            }
+            return null;
+        }
         public bool checkInconsistencyOfStateHasNoTransitionFunction()
         {
             foreach(State s in states)
@@ -98,12 +115,23 @@ namespace ActionsWithAgents
                         });
                         if (lastFluent.Initial != vs.fluent.Initial)
                         {
-                            return false;
+                            return true;
                         }
                     }
                 }
             }
-            return true;            
+            return false;            
+        }
+
+        public string printGraph(Graph g)
+        {
+            string str = "";
+            str += "Initial state: " + g.initialState.Name + "\n";
+            foreach(Transition t in g.graphTransitionFunctions)
+            {
+                str += "Transition (" + t.action.Name + ", " + t.agent.Name + " " + t.starting.Name + ") = " + t.resulting.Name + "\n"; 
+            }
+            return str;
         }
         private void Form4_Load(object sender, EventArgs e)
         {
@@ -116,9 +144,19 @@ namespace ActionsWithAgents
                 comboBox1.Items.Add(a.Name);
             }
 
-            if(checkInconsistencyOfStateHasNoTransitionFunction())
+            if(graphs.Count == 1  && checkInconsistencyOfStateHasNoTransitionFunction())
             {
                 MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function defined for it.");
+                InConsistent = true;
+            }
+            else if(graphs.Count > 1)
+            {
+                Graph g = checkInconsistencyOfStateHasNoTransitionFunctionForMultiple();
+                string str = "";
+                str += "This is an inconsistent domain because there is a state which has no transition function defined for it.\n";
+                str += "The graph functions are:\n";
+                str += printGraph(g);
+                MessageBox.Show(str);
                 InConsistent = true;
             }
             else
