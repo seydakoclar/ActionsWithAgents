@@ -144,21 +144,12 @@ namespace ActionsWithAgents
                 comboBox1.Items.Add(a.Name);
             }
 
-            if(graphs.Count == 1  && checkInconsistencyOfStateHasNoTransitionFunction())
+            if(checkInconsistencyOfStateHasNoTransitionFunction())
             {
                 MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function defined for it.");
                 InConsistent = true;
             }
-            else if(graphs.Count > 1)
-            {
-                /*Graph g = checkInconsistencyOfStateHasNoTransitionFunctionForMultiple();
-                string str = "";
-                str += "This is an inconsistent domain because there is a state which has no transition function defined for it.\n";
-                str += "The graph functions are:\n";
-                str += printGraph(g);
-                MessageBox.Show(str);
-                InConsistent = true;*/
-            }
+            
             else
             {
                 if (checkInitiallyStatementConflict())
