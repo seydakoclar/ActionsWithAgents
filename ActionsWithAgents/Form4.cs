@@ -135,6 +135,7 @@ namespace ActionsWithAgents
                 }
             }
 
+            printTransitions();
         }
         
         private void button1_Click(object sender, EventArgs e)
@@ -263,5 +264,16 @@ namespace ActionsWithAgents
             }
         }
 
+        private void printTransitions()
+        {
+            foreach(Graph g in graphs)
+            {
+                List<Transition> l = g.graphTransitionFunctions;
+                foreach(Transition t in l)
+                {
+                    listView2.Items.Add("Ψ (" + t.action + "," + t.agent + "," + t.starting + ") = " + t.resulting);
+                }
+            }
+        }
     }
 }
