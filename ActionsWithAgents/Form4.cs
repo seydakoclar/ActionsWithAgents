@@ -167,6 +167,7 @@ namespace ActionsWithAgents
                 }
             }
 
+            printTransitions();
         }
         
         private void button1_Click(object sender, EventArgs e)
@@ -345,11 +346,33 @@ namespace ActionsWithAgents
             }
         }
 
+        private void printTransitions()
+        {
+            foreach(Graph g in graphs)
+            {
+                List<Transition> l = g.graphTransitionFunctions;
+                foreach(Transition t in l)
+                {
+                    listView2.Items.Add("Ψ (" + t.agent.Name + "," + t.action.Name + "," + t.starting.Name+ ") = " + t.resulting.Name);
+                }
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             Form1 frm1 = new Form1();
             frm1.Show();
             this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+            textBox2.Text = "";
+            checkBox5.Checked = false;
+            listView1.Items.Clear();
         }
     }
 }
