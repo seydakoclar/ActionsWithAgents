@@ -15,14 +15,16 @@ namespace ActionsWithAgents
     {
         public string StatementType;//initially, value, effectwithif, effect
         public string StatementSentence; //the sentence of the statement
+
     }
 
     public class InitiallyStatement : Statement
     {
-        Fluent fluent;
+        public Fluent fluent;
         public InitiallyStatement(Fluent f)
         {
             StatementType = "initially";
+            fluent = f;
             string sentence = "INITIALLY ";
             if (f.Initial == true)
                 sentence += f.Name;
@@ -34,16 +36,17 @@ namespace ActionsWithAgents
 
     public class EffectStatement: Statement
     {
-        Agent agent;
-        Action action;
-        Fluent firstFluent;
-        List<Fluent> secondaryFluents;
+        public Agent agent;
+        public Action action;
+        public Fluent firstFluent;
+        public List<Fluent> secondaryFluents;
 
         public EffectStatement(Agent _ag, Fluent _f, Action _A, List<Fluent> _fluents)
         {
             agent = _ag;
             firstFluent = _f;
             action = _A;
+            secondaryFluents = _fluents;
             StatementSentence += _A.Name + " by " + _ag.Name + " causes ";
             if (_f.Initial == true)
                 StatementSentence += _f.Name;
@@ -86,13 +89,15 @@ namespace ActionsWithAgents
 
     public class ValueStatement : Statement
     {
-        List<Agent> agents;
-        List<Action> actions;
-        Fluent fluent;
+        public List<Agent> agents;
+        public List<Action> actions;
+        public Fluent fluent;
 
         public ValueStatement(List<Agent> _agents, Fluent _f, List<Action> _actions)
         {
             fluent = _f;
+            agents = _agents;
+            actions = _actions;
             StatementType = "value";
             if (_f.Initial == true)
                 StatementSentence += _f.Name;

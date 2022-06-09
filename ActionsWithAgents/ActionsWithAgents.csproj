@@ -35,6 +35,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Agent.cs" />
     <Compile Include="Action.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="Form4.cs">
       <SubType>Form</SubType>
     </Compile>

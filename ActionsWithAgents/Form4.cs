@@ -14,12 +14,14 @@ namespace ActionsWithAgents
     {
         List<Agent> agents;
         List<Fluent> fluents;
-        List<State> states;
-        public Form4(List<Agent> a, List<Fluent> f, List<State> s)
+        List<Transition> transitions;
+        List<Graph> graphs;
+        public Form4(List<Agent> a, List<Fluent> f, List<Transition> t, List<Graph> g)
         {
             agents = a;
             fluents = f;
-            states = s;
+            transitions = t;
+            graphs = g;
             InitializeComponent();
         }
 
@@ -33,6 +35,9 @@ namespace ActionsWithAgents
             {
                 comboBox1.Items.Add(a.Name);
             }
+
+            //Check inconsistency
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,6 +46,11 @@ namespace ActionsWithAgents
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }
