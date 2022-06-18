@@ -123,9 +123,9 @@ namespace ActionsWithAgents
             return false;            
         }
 
-        public string printGraph(Graph g)
+        public string printGraph(Graph g, int num)
         {
-            string str = "";
+            string str = "Graph " + num + "\n";
             str += "Initial state: " + g.initialState.Name + "\n";
             foreach(Transition t in g.graphTransitionFunctions)
             {
@@ -138,10 +138,17 @@ namespace ActionsWithAgents
             foreach (Agent a in agents)
             {
                 comboBox2.Items.Add(a.Name);
+                comboBox4.Items.Add(a.Name);
+                comboBox5.Items.Add(a.Name);
             }
             foreach (Fluent a in fluents)
             {
                 comboBox1.Items.Add(a.Name);
+            }
+            foreach(Action a in actions)
+            {
+                comboBox3.Items.Add(a.Name);
+                comboBox6.Items.Add(a.Name);
             }
 
            /* if(checkInconsistencyOfStateHasNoTransitionFunction())
@@ -186,22 +193,25 @@ namespace ActionsWithAgents
                 //(prepare,Anna),(eat,alex)
                 Fluent f = new Fluent(fluents[comboBox1.SelectedIndex]);
                 f.ChangeInit(!checkBox5.Checked);
-                string[] strArr = textBox1.Text.Split(',');
+                
                 programSequence = new List<Tuple<Action, Agent>> { };
-                for (int i = 0; i < strArr.Length; i += 2)
+                foreach(ListViewItem item in listView3.Items)
                 {
-                    Action a = new Action(strArr[i].Substring(1));
-                    Agent ag = new Agent(strArr[i + 1].Substring(0, strArr[i + 1].Length - 1));
+                    string str = item.Text;
+                    string[] strArr = str.Split(',');
+                    Action a = new Action(strArr[0].Substring(1));
+                    Agent ag = new Agent(strArr[1].Substring(1, strArr[1].Length - 2));
                     programSequence.Add(new Tuple<Action, Agent>(a, ag));
                 }
                 if (!InConsistent)
                 {
-                    if (graphs.Count == 1)
+                    int count = 1;
+                    foreach(Graph g in graphs)
                     {
-                        State resultingState = graphs[0].initialState;
+                        State resultingState = g.initialState;
                         foreach (Tuple<Action, Agent> pair in programSequence)
                         {
-                            Transition t = transitions.Find(delegate (Transition f1)
+                            Transition t = g.graphTransitionFunctions.Find(delegate (Transition f1)
                             {
                                 return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
                             });
@@ -213,42 +223,20 @@ namespace ActionsWithAgents
                         });
                         if (lastFluent.Initial == f.Initial)
                         {
-                            listView1.Items.Add("TRUE");
+                            if(graphs.Count > 1)
+                                listView1.Items.Add("TRUE for graph " + count);
+                            else
+                                listView1.Items.Add("TRUE");
                         }
                         else
                         {
-                            listView1.Items.Add("FALSE");
-                        }
-                    }
-                    else
-                    {
-                        int count = 1;
-                        foreach(Graph g in graphs)
-                        {
-                            State resultingState = g.initialState;
-                            foreach (Tuple<Action, Agent> pair in programSequence)
-                            {
-                                Transition t = g.graphTransitionFunctions.Find(delegate (Transition f1)
-                                {
-                                    return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
-                                });
-                                resultingState = t.resulting;
-                            }
-                            Fluent lastFluent = resultingState.fluents.Find(delegate (Fluent f1)
-                            {
-                                return f1.Name == f.Name;
-                            });
-                            if (lastFluent.Initial == f.Initial)
-                            {
-                                listView1.Items.Add("TRUE for graph " + count);
-                            }
-                            else
-                            {
+                            if(graphs.Count > 1)
                                 listView1.Items.Add("FALSE for graph " + count);
-                            }
-                            count++;
+                            else
+                                listView1.Items.Add("FALSE");
                         }
-                    }
+                        count++;
+                    }  
                 }
                 else
                 {
@@ -275,23 +263,25 @@ namespace ActionsWithAgents
             {
                 Agent agent = agents[comboBox2.SelectedIndex];
                 bool isInvolved = false;
-                string[] strArr = textBox2.Text.Split(',');
                 programSequence = new List<Tuple<Action, Agent>> { };
-                for (int i = 0; i < strArr.Length; i += 2)
+                foreach (ListViewItem item in listView4.Items)
                 {
-                    Action a = new Action(strArr[i].Substring(1));
-                    Agent ag = new Agent(strArr[i + 1].Substring(0, strArr[i + 1].Length - 1));
+                    string str = item.Text;
+                    string[] strArr = str.Split(',');
+                    Action a = new Action(strArr[0].Substring(1));
+                    Agent ag = new Agent(strArr[1].Substring(1, strArr[1].Length - 2));
                     programSequence.Add(new Tuple<Action, Agent>(a, ag));
                 }
 
                 if (!InConsistent)
                 {
-                    if (graphs.Count == 1)
+                    int count = 0;
+                    foreach (Graph g in graphs)
                     {
-                        State resultingState = graphs[0].initialState;
+                        State resultingState = g.initialState;
                         foreach (Tuple<Action, Agent> pair in programSequence)
                         {
-                            Transition t = transitions.Find(delegate (Transition f1)
+                            Transition t = g.graphTransitionFunctions.Find(delegate (Transition f1)
                             {
                                 return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
                             });
@@ -302,42 +292,22 @@ namespace ActionsWithAgents
 
                         if (isInvolved)
                         {
-                            listView1.Items.Add("YES");
+                            if (graphs.Count > 1)
+                                listView1.Items.Add("TRUE for graph " + count);
+                            else
+                                listView1.Items.Add("TRUE");
                         }
                         else
                         {
-                            listView1.Items.Add("NO");
-                        }
-                    }
-                    else
-                    {
-                        int count = 0;
-                        foreach (Graph g in graphs)
-                        {
-                            State resultingState = g.initialState;
-                            foreach (Tuple<Action, Agent> pair in programSequence)
-                            {
-                                Transition t = g.graphTransitionFunctions.Find(delegate (Transition f1)
-                                {
-                                    return f1.action.Name == pair.Item1.Name && f1.agent.Name == pair.Item2.Name && f1.starting.Name == resultingState.Name;
-                                });
-                                if (resultingState.Name != t.resulting.Name && t.agent.Name == agent.Name)
-                                    isInvolved = true;
-                                resultingState = t.resulting;
-                            }
-
-                            if (isInvolved)
-                            {
-                                listView1.Items.Add("YES for graph " + count);
-                            }
+                            if (graphs.Count > 1)
+                                listView1.Items.Add("FALSE for graph " + count);
                             else
-                            {
-                                listView1.Items.Add("NO for graph " + count);
-                            }
-                            count++;
-                            isInvolved = false;
+                                listView1.Items.Add("FALSE");
                         }
+                        count++;
+                        isInvolved = false;
                     }
+                    
                 }
                 else
                 {
@@ -367,12 +337,89 @@ namespace ActionsWithAgents
 
         private void button4_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
             comboBox1.SelectedIndex = -1;
             comboBox2.SelectedIndex = -1;
-            textBox2.Text = "";
+            comboBox3.SelectedIndex = -1;
+            comboBox4.SelectedIndex = -1;
+            comboBox5.SelectedIndex = -1;
+            comboBox6.SelectedIndex = -1;
             checkBox5.Checked = false;
             listView1.Items.Clear();
+            listView3.Items.Clear();
+            listView4.Items.Clear();
+
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (comboBox3.SelectedIndex != -1 && comboBox4.SelectedIndex != -1)
+            {
+                string str = "(";
+                str += actions[comboBox3.SelectedIndex].Name + ", " + agents[comboBox4.SelectedIndex].Name + ")";
+                listView3.Items.Add(str);
+                comboBox3.SelectedIndex = -1;
+                comboBox4.SelectedIndex = -1;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (comboBox5.SelectedIndex != -1 && comboBox6.SelectedIndex != -1)
+            {
+                string str = "(";
+                str += actions[comboBox6.SelectedIndex].Name + ", " + agents[comboBox5.SelectedIndex].Name + ")";
+                listView4.Items.Add(str);
+                comboBox6.SelectedIndex = -1;
+                comboBox5.SelectedIndex = -1;
+            }
+        }
+
+        private void listView3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in listView3.SelectedItems)
+            {
+                listView3.Items.Remove(eachItem);
+            }
+        }
+
+        private void listView3_MouseHover(object sender, EventArgs e)
+        {
+                ToolTip toolTip1 = new ToolTip();
+
+                // Set up the delays for the ToolTip.
+                toolTip1.AutoPopDelay = 5000;
+                toolTip1.ReshowDelay = 500;
+                // Force the ToolTip text to be displayed whether or not the form is active.
+                toolTip1.ShowAlways = true;
+
+                toolTip1.SetToolTip(listView3, "Click on the item to remove it.");
+        
+        }
+
+        private void listView4_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(listView4, "Click on the item to remove it.");
+        }
+
+        private void listView4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in listView4.SelectedItems)
+            {
+                listView4.Items.Remove(eachItem);
+            }
         }
     }
 }
