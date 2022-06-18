@@ -21,5 +21,13 @@ namespace ActionsWithAgents
             starting = s;
             resulting = r;
         }
+
+        public Transition(Transition t)
+        {
+            agent = t.agent;
+            action = t.action;
+            starting = t.starting;
+            resulting = t.resulting;
+        }
     }
 }

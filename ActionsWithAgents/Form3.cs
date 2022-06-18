@@ -97,7 +97,37 @@ namespace ActionsWithAgents
             else
                 return false;
         }
-        public bool evaluateStatements(List<EffectStatement> estatements, State sFrom, State sTo)
+
+        public bool compareList(List<Fluent> fl1, List<Fluent> fl2)
+        {
+            int count = 0;
+            foreach(Fluent f1 in fl1)
+            {
+                foreach(Fluent f2 in fl2)
+                {
+                    if(f1.Name == f2.Name && f1.Initial == f2.Initial)
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            if (count == fl1.Count)
+                return true;
+            else
+                return false;
+        }
+
+        public State findState(List<Fluent> fluentsList)
+        {
+            foreach(State s in states)
+            {
+                if (compareList(s.fluents, fluentsList))
+                    return s;
+            }
+            return null;
+        }
+        public State evaluateStatements(List<EffectStatement> estatements, State sFrom)
         {
             List<Fluent> fluentList = new List<Fluent> { };
             foreach(Fluent f in sFrom.fluents)
@@ -126,19 +156,8 @@ namespace ActionsWithAgents
                     fluentList[index].ChangeInit(es.firstFluent.Initial);
                 }
             }
-            int count = 0;
-            foreach(Fluent f in sTo.fluents)
-            {
-                foreach(Fluent f2 in fluentList)
-                {
-                    if (f2.Name == f.Name && f2.Initial == f.Initial)
-                        count++;
-                }
-            }
-            if (count == fluentList.Count)
-                return true;
-            else
-                return false;
+
+            return findState(fluentList);
         }
         public List<EffectStatement> getEffectStatements(Tuple<Action, Agent> pair )
         {
@@ -166,17 +185,25 @@ namespace ActionsWithAgents
             }
             return false;
         }
-        public Transition createTransition(State sFrom, State sTo, List<Tuple<Action, Agent>> pairsEffect)
+        public Tuple<Transition,State> createTransition(State sFrom, Tuple<Action, Agent> pair)
         {
-            foreach(Tuple<Action, Agent> pair in pairsEffect)
+            List<EffectStatement> eStatements = getEffectStatements(pair);
+
+            State sto = evaluateStatements(eStatements, sFrom);
+            if (sto != null)
             {
-                List<EffectStatement> eStatements = getEffectStatements(pair);
-                if(evaluateStatements(eStatements, sFrom, sTo))
-                {
-                    return new Transition(pair.Item2, pair.Item1, sFrom, sTo);
-                }
-            }          
-            return null;
+                Transition t = new Transition(pair.Item2, pair.Item1, sFrom, sto);
+                return new Tuple<Transition, State>(t,sto);
+            }         
+            return new Tuple<Transition, State>(null,null);
+        }
+
+        bool checkStateNotExists(State s, List<State> statess)
+        {
+            foreach(State s1 in statess)
+                if (s.Name == s1.Name)
+                    return false;
+            return true;
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -245,45 +272,45 @@ namespace ActionsWithAgents
 
             //create transition functions, i.e, graph in here
             transitions = new List<Transition> { };
-            List<State> statesOfGraph = new List<State> { };
-            //Tuple<Action, Agent>[,] graphArray;
             
             foreach (Graph g in graphs)
             {
+                List<State> statesOfGraph = new List<State> { };
                 statesOfGraph.Add(g.initialState);
-                foreach (State sFrom in states)
+                int index = 0;
+                g.graphTransitionFunctions = new List<Transition> { };
+                
+                while(index < statesOfGraph.Count)
                 {
-                    foreach(State sTo in states)
+                    State sfrom = statesOfGraph[index];
+                    //evaluate pairs with effect
+                    foreach (Tuple<Action, Agent> pair in pairsEffect)
                     {
-                        Transition t = createTransition(sFrom, sTo, pairsEffect);
-                        if(t != null)
+                        Tuple<Transition, State> ts = createTransition(sfrom, pair);
+                        if (ts.Item1 != null && ts.Item2 != null)
                         {
+                            Transition t = new Transition(ts.Item1);
+                            State s = new State(ts.Item2);
+                            g.graphTransitionFunctions.Add(t);
                             transitions.Add(t);
-
-                            bool control = true;
-                            foreach (State s in statesOfGraph)
-                            {
-                                if (s.Name == sFrom.Name)
-                                    control = false;
-                            }
-                            if (control)
-                                statesOfGraph.Add(sFrom);
+                            if(checkStateNotExists(s, statesOfGraph))
+                                statesOfGraph.Add(s);
                         }
-                        if(sFrom == sTo)
-                        {
-                            foreach (Tuple<Action, Agent> pair in pairsNoEffect)
-                            {
-                                transitions.Add(new Transition(pair.Item2, pair.Item1, sFrom, sTo));
-                            }
-                        }
-                        
                     }
                     
+                    //evaluate pairs with no effect
+                    foreach (Tuple<Action, Agent> pair in pairsNoEffect)
+                    {
+                        Transition t = new Transition(pair.Item2, pair.Item1, sfrom, sfrom);
+                        g.graphTransitionFunctions.Add(t);
+                        transitions.Add(t);
+                    }
+                    index++;
                 }
-                g.states = statesOfGraph.ToArray();
-                printTransitions(transitions);
-                g.graphTransitionFunctions = transitions;
                 
+               
+                Console.WriteLine("--------------------------");
+                g.states = statesOfGraph.ToArray();  
                 printAllStatesOfGraph(g.states);
             }
             

@@ -83,7 +83,7 @@ namespace ActionsWithAgents
                     if (str[0] == '-')
                     {
                         init = false;
-                        name = str.Substring(1);
+                        name = str.Substring(2);
                     }
                     secondaryFluents.Add(new Fluent(name, init));    
                 }

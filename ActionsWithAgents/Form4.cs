@@ -33,39 +33,39 @@ namespace ActionsWithAgents
             states = st;
             InitializeComponent();
         }
-        public Graph checkInconsistencyOfStateHasNoTransitionFunctionForMultiple()
-        {
-            foreach(Graph g in graphs)
-            {
-                foreach (State s in g.states)
-                {
-                    Transition t = transitions.Find(delegate (Transition f1)
-                    {
-                        return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
-                    });
-                    if (t != null)
-                        return g;
-                    else
-                        return null;
-                }
-            }
-            return null;
-        }
-        public bool checkInconsistencyOfStateHasNoTransitionFunction()
-        {
-            foreach(State s in states)
-            {
-                Transition t = transitions.Find(delegate (Transition f1)
-                {
-                    return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
-                });
-                if (t != null)
-                    return false;
-                else
-                    return true;
-            }
-            return true;
-        }
+        //public Graph checkInconsistencyOfStateHasNoTransitionFunctionForMultiple()
+        //{
+        //    foreach(Graph g in graphs)
+        //    {
+        //        foreach (State s in g.states)
+        //        {
+        //            Transition t = transitions.Find(delegate (Transition f1)
+        //            {
+        //                return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
+        //            });
+        //            if (t != null)
+        //                return g;
+        //            else
+        //                return null;
+        //        }
+        //    }
+        //    return null;
+        //}
+        //public bool checkInconsistencyOfStateHasNoTransitionFunction()
+        //{
+        //    foreach(State s in states)
+        //    {
+        //        Transition t = transitions.Find(delegate (Transition f1)
+        //        {
+        //            return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
+        //        });
+        //        if (t != null)
+        //            return false;
+        //        else
+        //            return true;
+        //    }
+        //    return true;
+        //}
 
         public bool checkInitiallyStatementConflict()
         {
@@ -144,14 +144,14 @@ namespace ActionsWithAgents
                 comboBox1.Items.Add(a.Name);
             }
 
-            if(checkInconsistencyOfStateHasNoTransitionFunction())
+           /* if(checkInconsistencyOfStateHasNoTransitionFunction())
             {
                 MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function defined for it.");
                 InConsistent = true;
-            }
+            }*/
             
-            else
-            {
+           /* else
+            {*/
                 if (checkInitiallyStatementConflict())
                 {
                     MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function satisfying the contradictory values of the same fluent.");
@@ -165,7 +165,7 @@ namespace ActionsWithAgents
                         InConsistent = true;
                     }
                 }
-            }
+            //}
 
             printTransitions();
         }

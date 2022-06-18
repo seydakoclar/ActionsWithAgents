@@ -19,6 +19,13 @@ namespace ActionsWithAgents
             fluents = _fluents;
         }
 
+        public State(State s)
+        {
+            isInitial = s.isInitial;
+            fluents = s.fluents;
+            Name = s.Name;
+        }
+
         public State(List<Fluent> _fluents, string name)
         {
             isInitial = false;
