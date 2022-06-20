@@ -33,39 +33,152 @@ namespace ActionsWithAgents
             states = st;
             InitializeComponent();
         }
-        //public Graph checkInconsistencyOfStateHasNoTransitionFunctionForMultiple()
-        //{
-        //    foreach(Graph g in graphs)
-        //    {
-        //        foreach (State s in g.states)
-        //        {
-        //            Transition t = transitions.Find(delegate (Transition f1)
-        //            {
-        //                return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
-        //            });
-        //            if (t != null)
-        //                return g;
-        //            else
-        //                return null;
-        //        }
-        //    }
-        //    return null;
-        //}
-        //public bool checkInconsistencyOfStateHasNoTransitionFunction()
-        //{
-        //    foreach(State s in states)
-        //    {
-        //        Transition t = transitions.Find(delegate (Transition f1)
-        //        {
-        //            return f1.starting.Name == s.Name && f1.resulting.Name != s.Name;
-        //        });
-        //        if (t != null)
-        //            return false;
-        //        else
-        //            return true;
-        //    }
-        //    return true;
-        //}
+
+        public List<EffectStatement> getAllEffectStatements()
+        {
+            List<EffectStatement> ests = new List<EffectStatement> { };
+            foreach(Statement s in statements)
+            {
+                if (s is EffectStatement es)
+                    ests.Add(es);
+            }
+            return ests;
+        }
+
+        public bool checkSecondaryFluentsAreCorrect(List<Fluent> secondary, List<Fluent> sFrom)
+        {
+            int count = 0;
+            foreach (Fluent f in sFrom)
+            {
+                foreach (Fluent f2 in secondary)
+                {
+                    if (f2.Name == f.Name && f2.Initial == f.Initial)
+                        count++;
+                }
+            }
+            if (count == secondary.Count)
+                return true;
+            else
+                return false;
+        }
+
+        public bool compareList(List<Fluent> fl1, List<Fluent> fl2)
+        {
+            int count = 0;
+            foreach (Fluent f1 in fl1)
+            {
+                foreach (Fluent f2 in fl2)
+                {
+                    if (f1.Name == f2.Name && f1.Initial == f2.Initial)
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            if (count == fl1.Count)
+                return true;
+            else
+                return false;
+        }
+
+
+        public bool evaluateTransitionWithEffect(State sfrom, State sto, EffectStatement es)
+        {
+            List<Fluent> fluentList = new List<Fluent> { };
+            foreach (Fluent f in sfrom.fluents)
+            {
+                fluentList.Add(new Fluent(f));
+            }
+            
+            if (es.StatementType == "effectwithif")
+            {
+                if (checkSecondaryFluentsAreCorrect(es.secondaryFluents, sfrom.fluents))
+                {
+                    int index = fluentList.FindIndex(delegate (Fluent f1)
+                    {
+                        return f1.Name == es.firstFluent.Name;
+                    });
+                    fluentList[index].Initial = es.firstFluent.Initial;
+                }
+            }
+            if (es.StatementType == "effect")
+            {
+                int index = fluentList.FindIndex(delegate (Fluent f1)
+                {
+                    return f1.Name == es.firstFluent.Name;
+                });
+                fluentList[index].ChangeInit(es.firstFluent.Initial);
+            }
+
+            if (compareList(sto.fluents, fluentList))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool checkInconsistencyOfContradictionInTransitionFunction()
+        {
+            List<Graph> removable = new List<Graph> { };
+            bool control = false;
+            foreach (Graph g in graphs)
+            {
+                //State resultingState = g.initialState;
+                List<EffectStatement> ests = new List<EffectStatement> { };
+                ests = getAllEffectStatements();
+                if (ests.Count > 0)
+                {
+                    foreach (EffectStatement es in ests)
+                    {
+                        List<Transition> trs = g.graphTransitionFunctions.FindAll(delegate (Transition f1)
+                        {
+                            return f1.action.Name == es.action.Name && f1.agent.Name == es.agent.Name;
+                        });
+
+                        foreach (Transition tr in trs)
+                        {
+                            if (!evaluateTransitionWithEffect(tr.starting, tr.resulting, es))
+                            {
+                                if (graphs.Count == 1)
+                                    return true;
+                                else
+                                {
+                                    removable.Add(g);
+                                    control = true;
+                                    break;
+                                }
+
+                            }
+                        }
+                        if (control)
+                        {
+                            control = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            foreach (Graph g in removable)
+            {
+                graphs.Remove(g);
+            }
+
+            if (graphs.Count <= 0)
+                return true;
+            return false;
+        }
+
+        public bool checkInconsistencyOfStateHasNoTransitionFunction()
+        {
+            foreach (Transition t in transitions)
+            {
+                if (t.resulting == null)
+                    return true;
+            }
+            return false;
+        }
 
         public bool checkInitiallyStatementConflict()
         {
@@ -93,6 +206,7 @@ namespace ActionsWithAgents
 
         public bool checkValueStatementInconsistency()
         {
+            List<Graph> removable= new List<Graph> { };
             foreach(Graph g in graphs)
             {
                 State resultingState = g.initialState;
@@ -115,11 +229,22 @@ namespace ActionsWithAgents
                         });
                         if (lastFluent.Initial != vs.fluent.Initial)
                         {
-                            return true;
+                            if(graphs.Count == 1)
+                                return true;
+                            else
+                                removable.Add(g);
                         }
                     }
                 }
             }
+            
+            foreach(Graph g in removable)
+            {
+                graphs.Remove(g);
+            }
+
+            if (graphs.Count <= 0)
+                return true;
             return false;            
         }
 
@@ -151,27 +276,29 @@ namespace ActionsWithAgents
                 comboBox6.Items.Add(a.Name);
             }
 
-           /* if(checkInconsistencyOfStateHasNoTransitionFunction())
+            if (checkInitiallyStatementConflict())
             {
+                MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function satisfying the contradictory values of the same fluent.");
+                InConsistent = true;
+            }
+            else if(checkValueStatementInconsistency())
+            {
+                MessageBox.Show("This is an inconsistent domain because there is conflict in the result of one of the value statements meaning that there is no model for this domain");
+                InConsistent = true;
+            }
+            else if (checkInconsistencyOfStateHasNoTransitionFunction())
+            {
+                
                 MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function defined for it.");
                 InConsistent = true;
-            }*/
-            
+            }
            /* else
-            {*/
-                if (checkInitiallyStatementConflict())
+            {
+                if (checkInconsistencyOfContradictionInTransitionFunction())
                 {
-                    MessageBox.Show("This is an inconsistent domain because there is a state which has no transition function satisfying the contradictory values of the same fluent.");
-                    InConsistent = true;
+
                 }
-                else
-                {
-                    if (checkValueStatementInconsistency())
-                    {
-                        MessageBox.Show("This is an inconsistent domain because there is conflict in the result of one of the value statements");
-                        InConsistent = true;
-                    }
-                }
+            }*/
             //}
 
             printTransitions();
@@ -323,7 +450,8 @@ namespace ActionsWithAgents
                 List<Transition> l = g.graphTransitionFunctions;
                 foreach(Transition t in l)
                 {
-                    listView2.Items.Add("Ψ (" + t.agent.Name + "," + t.action.Name + "," + t.starting.Name+ ") = " + t.resulting.Name);
+                    if(t.resulting != null)
+                        listView2.Items.Add("Ψ (" + t.agent.Name + "," + t.action.Name + "," + t.starting.Name+ ") = " + t.resulting.Name);
                 }
             }
         }
