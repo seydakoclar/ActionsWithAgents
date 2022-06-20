@@ -130,10 +130,13 @@ namespace ActionsWithAgents
         public State evaluateStatements(List<EffectStatement> estatements, State sFrom)
         {
             List<Fluent> fluentList = new List<Fluent> { };
-            foreach(Fluent f in sFrom.fluents)
+            List<bool> changed = new List<bool> { };
+            foreach (Fluent f in sFrom.fluents)
             {
                 fluentList.Add(new Fluent(f));
+                changed.Add(false);
             }
+    
             foreach (EffectStatement es in estatements)
             {
                 if (es.StatementType == "effectwithif")
@@ -145,6 +148,9 @@ namespace ActionsWithAgents
                                 return f1.Name == es.firstFluent.Name;
                             });
                         fluentList[index].Initial = es.firstFluent.Initial;
+                        if (changed[index])
+                            return null;
+                        changed[index] = true;
                     }
                 }
                 if(es.StatementType == "effect")
@@ -154,6 +160,9 @@ namespace ActionsWithAgents
                         return f1.Name == es.firstFluent.Name;
                     });
                     fluentList[index].ChangeInit(es.firstFluent.Initial);
+                    if (changed[index])
+                        return null;
+                    changed[index] = true;
                 }
             }
 
@@ -205,6 +214,7 @@ namespace ActionsWithAgents
                     return false;
             return true;
         }
+
         private void button4_Click(object sender, EventArgs e)
         {
             //create states here
@@ -296,6 +306,12 @@ namespace ActionsWithAgents
                             if(checkStateNotExists(s, statesOfGraph))
                                 statesOfGraph.Add(s);
                         }
+                        else
+                        {
+                            Transition t = new Transition(pair.Item2, pair.Item1, sfrom, null);
+                            g.graphTransitionFunctions.Add(t);
+                            transitions.Add(t);
+                        }
                     }
                     
                     //evaluate pairs with no effect
@@ -313,7 +329,8 @@ namespace ActionsWithAgents
                 g.states = statesOfGraph.ToArray();  
                 printAllStatesOfGraph(g.states);
             }
-            
+
+
             //send these as arguments to form4
             Form4 frm4 = new Form4(agents, fluents, actions, transitions, statements, graphs, states);
             frm4.Show();

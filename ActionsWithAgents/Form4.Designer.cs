@@ -107,7 +107,7 @@ namespace ActionsWithAgents
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(37, 185);
+            this.comboBox2.Location = new System.Drawing.Point(31, 187);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 7;
@@ -115,7 +115,7 @@ namespace ActionsWithAgents
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(34, 165);
+            this.label3.Location = new System.Drawing.Point(28, 165);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 17);
             this.label3.TabIndex = 6;
@@ -124,7 +124,7 @@ namespace ActionsWithAgents
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(174, 188);
+            this.label4.Location = new System.Drawing.Point(171, 190);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 17);
             this.label4.TabIndex = 5;
@@ -133,9 +133,9 @@ namespace ActionsWithAgents
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.listView1);
-            this.groupBox1.Location = new System.Drawing.Point(37, 306);
+            this.groupBox1.Location = new System.Drawing.Point(30, 306);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(718, 90);
+            this.groupBox1.Size = new System.Drawing.Size(725, 90);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Query Result";
@@ -153,7 +153,7 @@ namespace ActionsWithAgents
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(32, 74);
+            this.checkBox5.Location = new System.Drawing.Point(30, 74);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(38, 21);
             this.checkBox5.TabIndex = 51;
@@ -163,9 +163,9 @@ namespace ActionsWithAgents
             // listView2
             // 
             this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(822, 76);
+            this.listView2.Location = new System.Drawing.Point(794, 72);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(576, 314);
+            this.listView2.Size = new System.Drawing.Size(576, 324);
             this.listView2.TabIndex = 52;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.List;
@@ -310,7 +310,7 @@ namespace ActionsWithAgents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1439, 474);
+            this.ClientSize = new System.Drawing.Size(1411, 474);
             this.Controls.Add(this.listView4);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.comboBox5);
